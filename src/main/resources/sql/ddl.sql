@@ -24,3 +24,25 @@ CREATE TABLE user_login_history
     logout_at   TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE account_book_group
+(
+    id            VARCHAR(36) PRIMARY KEY NOT NULL,
+    user_id       VARCHAR(36)             NOT NULL,
+    name          VARCHAR(100)            NOT NULL,
+    code          VARCHAR(10) UNIQUE      NOT NULL,
+    created_at    TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted_at    TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE account_book_group_user
+(
+    group_id      VARCHAR(36)             NOT NULL,
+    user_id       VARCHAR(36)             NOT NULL,
+    joined_at     TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    left_at       TIMESTAMP,
+    PRIMARY KEY (group_id, user_id),
+    FOREIGN KEY (group_id) REFERENCES account_book_group (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

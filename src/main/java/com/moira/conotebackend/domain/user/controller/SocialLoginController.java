@@ -1,6 +1,7 @@
 package com.moira.conotebackend.domain.user.controller;
 
 import com.moira.conotebackend.domain.user.dto.request.KakaoCodeRequest;
+import com.moira.conotebackend.domain.user.dto.request.NaverCodeRequest;
 import com.moira.conotebackend.domain.user.dto.response.TokenResponse;
 import com.moira.conotebackend.domain.user.service.SocialLoginService;
 import jakarta.servlet.http.Cookie;
@@ -48,20 +49,20 @@ public class SocialLoginController {
         return ResponseEntity.ok().body(tokens.atk());
     }
 
-    @GetMapping("/naver/oauth")
+    @PostMapping("/naver")
     ResponseEntity<String> naverLogin(
-            @RequestParam String code,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @RequestBody NaverCodeRequest request,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse
     ) {
         // [1] IP 추출
-        String ipAddress = request.getRemoteAddr();
+        String ipAddress = httpServletRequest.getRemoteAddr();
 
         // [2] 로그인 성공 후 atk, rtk 반환
-        TokenResponse tokens = socialLoginService.naverLogin(code, ipAddress);
+        TokenResponse tokens = socialLoginService.naverLogin(request.code(), request.state(), ipAddress);
 
         // [3] rtk는 쿠키에 넣어준다.
-        this.putRtkInCookie(response, tokens.rtk());
+        this.putRtkInCookie(httpServletResponse, tokens.rtk());
 
         // [4] atk는 요청 본문으로 반환한다.
         return ResponseEntity.ok().body(tokens.atk());

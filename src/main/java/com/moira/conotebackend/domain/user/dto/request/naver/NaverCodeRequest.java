@@ -1,4 +1,4 @@
-package com.moira.conotebackend.domain.user.dto.request;
+package com.moira.conotebackend.domain.user.dto.request.naver;
 
 public record NaverCodeRequest(
         String code,

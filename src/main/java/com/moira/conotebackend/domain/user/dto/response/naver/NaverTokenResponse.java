@@ -1,4 +1,4 @@
-package com.moira.conotebackend.domain.user.dto.response;
+package com.moira.conotebackend.domain.user.dto.response.naver;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

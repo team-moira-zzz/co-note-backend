@@ -1,8 +1,8 @@
 package com.moira.conotebackend.domain.user.service;
 
 import com.moira.conotebackend.domain.user.component.OauthRequestSender;
-import com.moira.conotebackend.domain.user.dto.response.KakaoUserInfoResponse;
-import com.moira.conotebackend.domain.user.dto.response.NaverUserInfoResponse;
+import com.moira.conotebackend.domain.user.dto.response.kakao.KakaoUserInfoResponse;
+import com.moira.conotebackend.domain.user.dto.response.naver.NaverUserInfoResponse;
 import com.moira.conotebackend.domain.user.dto.response.TokenResponse;
 import com.moira.conotebackend.domain.user.entity.User;
 import com.moira.conotebackend.domain.user.entity.UserLoginHistory;

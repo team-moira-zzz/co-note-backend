@@ -1,7 +1,7 @@
 package com.moira.conotebackend.domain.user.controller;
 
-import com.moira.conotebackend.domain.user.dto.request.KakaoCodeRequest;
-import com.moira.conotebackend.domain.user.dto.request.NaverCodeRequest;
+import com.moira.conotebackend.domain.user.dto.request.kakao.KakaoCodeRequest;
+import com.moira.conotebackend.domain.user.dto.request.naver.NaverCodeRequest;
 import com.moira.conotebackend.domain.user.dto.response.TokenResponse;
 import com.moira.conotebackend.domain.user.service.SocialLoginService;
 import jakarta.servlet.http.Cookie;

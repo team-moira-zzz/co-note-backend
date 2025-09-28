@@ -1,9 +1,9 @@
 package com.moira.conotebackend.domain.user.component;
 
-import com.moira.conotebackend.domain.user.dto.response.KakaoTokenResponse;
-import com.moira.conotebackend.domain.user.dto.response.KakaoUserInfoResponse;
-import com.moira.conotebackend.domain.user.dto.response.NaverTokenResponse;
-import com.moira.conotebackend.domain.user.dto.response.NaverUserInfoResponse;
+import com.moira.conotebackend.domain.user.dto.response.kakao.KakaoTokenResponse;
+import com.moira.conotebackend.domain.user.dto.response.kakao.KakaoUserInfoResponse;
+import com.moira.conotebackend.domain.user.dto.response.naver.NaverTokenResponse;
+import com.moira.conotebackend.domain.user.dto.response.naver.NaverUserInfoResponse;
 import com.moira.conotebackend.global.exception.ErrorCode;
 import com.moira.conotebackend.global.exception.custom.CoNoteUserException;
 import lombok.RequiredArgsConstructor;

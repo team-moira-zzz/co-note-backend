@@ -15,4 +15,7 @@ public interface UserMapper {
     void updateUserLoginInfo(String id, String rtk);
 
     void insertUserLoginHistory(UserLoginHistory userLoginHistory);
+
+    // 로그아웃
+    void updateUserLogoutInfo(String userId);
 }

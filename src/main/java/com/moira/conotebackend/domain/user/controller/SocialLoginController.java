@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.moira.conotebackend.global.constant.CoNoteConstant.RTK_COOKIE_NAME;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/login")
 public class SocialLoginController {
-    private final static String RTK_COOKIE_NAME = "refreshToken";
     private final SocialLoginService socialLoginService;
 
     private void putRtkInCookie(HttpServletResponse response, String rtk) {

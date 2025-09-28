@@ -13,13 +13,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import static com.moira.conotebackend.global.constant.CoNoteConstant.KAKAO_TOKEN_URL;
+import static com.moira.conotebackend.global.constant.CoNoteConstant.KAKAO_USER_INFO_URL;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class OauthRequestSender {
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
-    private final String KAKAO_USER_INFO_URL = "https://kapi.kakao.com/v2/user/me?secure_resource=true";
 
     @Value("${kakao.client_id}")
     private String CLIENT_ID;

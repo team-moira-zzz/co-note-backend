@@ -36,13 +36,13 @@
     <select id="getUserByEmail" resultType="com.moira.conotebackend.domain.user.entity.User">
         SELECT
                id
+             , role
+             , status
+             , type
              , email
              , name
              , nickname
              , phone
-             , role
-             , status
-             , type
              , rtk
              , last_login_at
              , created_at

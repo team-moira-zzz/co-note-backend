@@ -1,5 +1,6 @@
 package com.moira.conotebackend.domain.user.controller;
 
+import com.moira.conotebackend.domain.user.dto.request.KakaoCodeRequest;
 import com.moira.conotebackend.domain.user.dto.response.TokenResponse;
 import com.moira.conotebackend.domain.user.service.SocialLoginService;
 import jakarta.servlet.http.Cookie;
@@ -7,10 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.moira.conotebackend.global.constant.CoNoteConstant.RTK_COOKIE_NAME;
 
@@ -31,20 +29,20 @@ public class SocialLoginController {
         response.addCookie(cookie);
     }
 
-    @GetMapping("/kakao/oauth")
+    @PostMapping("/kakao")
     ResponseEntity<String> kakaoLogin(
-            @RequestParam String code,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @RequestBody KakaoCodeRequest request,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse
     ) {
         // [1] IP 추출
-        String ipAddress = request.getRemoteAddr();
+        String ipAddress = httpServletRequest.getRemoteAddr();
 
         // [2] 로그인 성공 후 atk, rtk 반환
-        TokenResponse tokens = socialLoginService.kakaoLogin(code, ipAddress);
+        TokenResponse tokens = socialLoginService.kakaoLogin(request.code(), ipAddress);
 
         // [3] rtk는 쿠키에 넣어준다.
-        this.putRtkInCookie(response, tokens.rtk());
+        this.putRtkInCookie(httpServletResponse, tokens.rtk());
 
         // [4] atk는 요청 본문으로 반환한다.
         return ResponseEntity.ok().body(tokens.atk());

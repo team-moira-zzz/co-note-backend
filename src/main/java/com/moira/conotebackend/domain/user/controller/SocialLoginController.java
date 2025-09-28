@@ -49,4 +49,23 @@ public class SocialLoginController {
         // [4] atk는 요청 본문으로 반환한다.
         return ResponseEntity.ok().body(tokens.atk());
     }
+
+    @GetMapping("/naver/oauth")
+    ResponseEntity<String> naverLogin(
+            @RequestParam String code,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        // [1] IP 추출
+        String ipAddress = request.getRemoteAddr();
+
+        // [2] 로그인 성공 후 atk, rtk 반환
+        TokenResponse tokens = socialLoginService.naverLogin(code, ipAddress);
+
+        // [3] rtk는 쿠키에 넣어준다.
+        this.putRtkInCookie(response, tokens.rtk());
+
+        // [4] atk는 요청 본문으로 반환한다.
+        return ResponseEntity.ok().body(tokens.atk());
+    }
 }

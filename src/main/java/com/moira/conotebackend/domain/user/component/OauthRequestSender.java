@@ -88,7 +88,6 @@ public class OauthRequestSender {
         }
     }
 
-
     public KakaoUserInfoResponse getKakaoUserInfo(String accessToken) {
         // [1] Http 구조 생성
         HttpEntity<MultiValueMap<String, String>> request = getHttpEntity2(accessToken);

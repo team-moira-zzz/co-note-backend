@@ -13,3 +13,15 @@ CREATE TABLE user
     created_at    TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE user_login_history
+(
+    id          VARCHAR(36) PRIMARY KEY NOT NULL,
+    user_id     VARCHAR(36)             NOT NULL,
+    ip_address  VARCHAR(45)             NOT NULL,
+    login_type  ENUM('KAKAO', 'NAVER')  NOT NULL,
+    is_success  BOOLEAN                 NOT NULL DEFAULT TRUE,
+    login_at    TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    logout_at   TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

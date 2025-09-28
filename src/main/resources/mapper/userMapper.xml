@@ -2,9 +2,82 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moira.conotebackend.domain.user.mapper.UserMapper">
     <!-- 회원가입 -->
-    <select id="checkEmail">
-        SELECT COUNT(id) AS USER_CNT
+    <insert id="signup" parameterType="com.moira.conotebackend.domain.user.entity.User">
+        INSERT INTO USER (
+               id
+             , email
+             , name
+             , nickname
+             , phone
+             , role
+             , status
+             , type
+             , rtk
+             , last_login_at
+             , created_at
+             , updated_at
+        ) VALUES (
+               #{id}
+             , #{email}
+             , #{name}
+             , #{nickname}
+             , #{phone}
+             , #{role}
+             , #{status}
+             , #{type}
+             , null
+             , null
+             , CURRENT_TIMESTAMP
+             , CURRENT_TIMESTAMP
+        )
+    </insert>
+
+    <!-- 로그인 -->
+    <select id="getUserByEmail" resultType="com.moira.conotebackend.domain.user.entity.User">
+        SELECT
+               id
+             , email
+             , name
+             , nickname
+             , phone
+             , role
+             , status
+             , type
+             , rtk
+             , last_login_at
+             , created_at
+             , updated_at
         FROM   USER
         WHERE  email = #{email}
     </select>
+
+    <update id="updateUserLoginInfo">
+        UPDATE USER
+        SET
+               rtk           = #{rtk}
+             , last_login_at = CURRENT_TIMESTAMP
+             , updated_at    = CURRENT_TIMESTAMP
+        WHERE  id = #{id}
+    </update>
+
+    <insert id="insertUserLoginHistory" parameterType="com.moira.conotebackend.domain.user.entity.UserLoginHistory">
+        INSERT INTO USER_LOGIN_HISTORY (
+               id
+             , user_id
+             , ip_address
+             , login_type
+             , is_success
+             , login_at
+             , logout_at
+        )
+        VALUES (
+                 #{id}
+               , #{userId}
+               , #{ipAddress}
+               , #{loginType}
+               , #{isSuccess}
+               , CURRENT_TIMESTAMP
+               , null
+        )
+    </insert>
 </mapper>

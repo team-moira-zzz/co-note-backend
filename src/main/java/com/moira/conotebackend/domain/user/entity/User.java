@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Getter
@@ -22,4 +23,19 @@ public class User {
     private LocalDateTime lastLoginAt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public User(String email, String nickname, UserType type) {
+        this.id = UUID.randomUUID().toString();
+        this.role = UserRole.USER;
+        this.status = UserStatus.ACTIVE;
+        this.type = type;
+        this.email = email;
+        this.name = null;
+        this.nickname = nickname;
+        this.phone = null;
+        this.rtk = null;
+        this.lastLoginAt = null;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -20,7 +20,6 @@ CREATE TABLE user_login_history
     user_id     VARCHAR(36)             NOT NULL,
     ip_address  VARCHAR(45)             NOT NULL,
     login_type  ENUM('KAKAO', 'NAVER')  NOT NULL,
-    is_success  BOOLEAN                 NOT NULL DEFAULT TRUE,
     login_at    TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
     logout_at   TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE

@@ -51,7 +51,7 @@ public class SocialLoginService {
         TokenResponse tokens = getTokens(user);
 
         // [3] 로그인 기록 저장
-        UserLoginHistory userLoginHistory = new UserLoginHistory(user, true, ipAddress);
+        UserLoginHistory userLoginHistory = new UserLoginHistory(user, ipAddress);
         userMapper.updateUserLoginInfo(user.getId(), tokens.rtk());
         userMapper.insertUserLoginHistory(userLoginHistory);
 
@@ -84,7 +84,7 @@ public class SocialLoginService {
         TokenResponse tokens = getTokens(user);
 
         // [3] 로그인 기록 저장
-        UserLoginHistory userLoginHistory = new UserLoginHistory(user, true, ipAddress);
+        UserLoginHistory userLoginHistory = new UserLoginHistory(user, ipAddress);
         userMapper.updateUserLoginInfo(user.getId(), tokens.rtk());
         userMapper.insertUserLoginHistory(userLoginHistory);
 

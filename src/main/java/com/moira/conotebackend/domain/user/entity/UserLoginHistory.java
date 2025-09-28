@@ -13,16 +13,14 @@ public class UserLoginHistory {
     private String userId;
     private String ipAddress;
     private UserType loginType;
-    private Boolean isSuccess;
     private LocalDateTime loginAt;
     private LocalDateTime logoutAt;
 
-    public UserLoginHistory(User user, Boolean isSuccess, String ipAddress) {
+    public UserLoginHistory(User user, String ipAddress) {
         this.id = UUID.randomUUID().toString();
         this.userId = user.getId();
         this.ipAddress = ipAddress;
         this.loginType = user.getType();
-        this.isSuccess = isSuccess;
         this.loginAt = LocalDateTime.now();
         this.logoutAt = null;
     }

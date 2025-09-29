@@ -1,5 +1,7 @@
 package com.moira.conotebackend.global.constant;
 
+import java.util.List;
+
 public class CoNoteConstant {
     // 로그인 관련
     public final static String RTK_COOKIE_NAME = "refreshToken";
@@ -15,4 +17,6 @@ public class CoNoteConstant {
     // 그룹 관련
     public static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public static final int CODE_LENGTH = 8;
+
+    public static final List<String> DEFAULT_CATEGORY_NAMES = List.of("식비", "교통비", "데이트");
 }

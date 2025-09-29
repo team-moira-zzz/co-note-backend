@@ -47,3 +47,14 @@ CREATE TABLE account_book_group_user
     FOREIGN KEY (group_id) REFERENCES account_book_group (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE account_book_category
+(
+    id            BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    group_id      VARCHAR(36)        NOT NULL,
+    name          VARCHAR(100)       NOT NULL,
+    created_at    TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (group_id) REFERENCES account_book_group (id) ON DELETE CASCADE
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

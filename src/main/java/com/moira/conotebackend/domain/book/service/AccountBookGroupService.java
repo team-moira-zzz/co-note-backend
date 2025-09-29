@@ -18,6 +18,7 @@ import static com.moira.conotebackend.global.constant.CoNoteConstant.CODE_LENGTH
 @Service
 public class AccountBookGroupService {
     private final AccountBookGroupMapper accountBookGroupMapper;
+    private final AccountBookService accountBookService;
     private static final SecureRandom RANDOM = new SecureRandom();
 
     private String generateRandomCode() {
@@ -49,5 +50,8 @@ public class AccountBookGroupService {
         // DB 저장
         accountBookGroupMapper.createAccountBookGroup(accountBookGroup);
         accountBookGroupMapper.insertAccountBookGroupUser(accountBookGroupUser);
+
+        // 그룹 내 기본 카테고리 생성
+        accountBookService.insertDefaultCategories(accountBookGroup.getId());
     }
 }

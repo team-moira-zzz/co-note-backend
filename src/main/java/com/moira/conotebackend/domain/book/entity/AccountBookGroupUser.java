@@ -12,4 +12,11 @@ public class AccountBookGroupUser {
     private String userId;
     private LocalDateTime joinedAt;
     private LocalDateTime leftAt;
+
+    public AccountBookGroupUser(String groupId, String userId) {
+        this.groupId = groupId;
+        this.userId = userId;
+        this.joinedAt = LocalDateTime.now();
+        this.leftAt = null;
+    }
 }

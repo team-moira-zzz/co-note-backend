@@ -7,4 +7,41 @@
         FROM   ACCOUNT_BOOK_GROUP_USER
         WHERE  user_id = #{userId} AND left_at IS NULL
     </select>
+
+    <!-- 그룹 생성 및 가입 -->
+    <insert id="createAccountBookGroup" parameterType="com.moira.conotebackend.domain.book.entity.AccountBookGroup">
+        INSERT INTO ACCOUNT_BOOK_GROUP (
+               id
+             , user_id
+             , name
+             , description
+             , code
+             , created_at
+             , deleted_at
+        )
+        VALUES (
+               #{id}
+             , #{userId}
+             , #{name}
+             , #{description}
+             , #{code}
+             , #{createdAt}
+             , #{deletedAt}
+        )
+    </insert>
+
+    <insert id="insertAccountBookGroupUser" parameterType="com.moira.conotebackend.domain.book.entity.AccountBookGroupUser">
+        INSERT INTO ACCOUNT_BOOK_GROUP_USER (
+               group_id
+             , user_id
+             , joined_at
+             , left_at
+        )
+        VALUES (
+               #{groupId}
+             , #{userId}
+             , #{joinedAt}
+             , #{leftAt}
+        )
+    </insert>
 </mapper>

@@ -30,6 +30,7 @@ CREATE TABLE account_book_group
     id            VARCHAR(36) PRIMARY KEY NOT NULL,
     user_id       VARCHAR(36)             NOT NULL,
     name          VARCHAR(100)            NOT NULL,
+    description   VARCHAR(500),
     code          VARCHAR(10) UNIQUE      NOT NULL,
     created_at    TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deleted_at    TIMESTAMP,

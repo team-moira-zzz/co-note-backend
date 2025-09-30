@@ -8,6 +8,13 @@
         WHERE  user_id = #{userId} AND left_at IS NULL
     </select>
 
+    <!-- 가입 그룹 ID 조회 -->
+    <select id="selectGroupId" resultType="java.lang.String">
+        SELECT group_id
+        FROM   ACCOUNT_BOOK_GROUP_USER
+        WHERE  user_id = #{userId} AND ROWNUM = 1
+    </select>
+
     <!-- 그룹 생성 및 가입 -->
     <insert id="createAccountBookGroup" parameterType="com.moira.conotebackend.domain.book.entity.AccountBookGroup">
         INSERT INTO ACCOUNT_BOOK_GROUP (

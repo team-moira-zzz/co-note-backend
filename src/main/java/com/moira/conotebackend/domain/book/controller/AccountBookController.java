@@ -1,5 +1,6 @@
 package com.moira.conotebackend.domain.book.controller;
 
+import com.moira.conotebackend.domain.book.dto.response.CategoryResponse;
 import com.moira.conotebackend.domain.book.dto.response.DailyAccountEntryResponse;
 import com.moira.conotebackend.domain.book.service.AccountBookService;
 import com.moira.conotebackend.global.auth.SimpleUserAuth;
@@ -15,12 +16,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/book/entries")
+@RequestMapping("/api/book")
 @RestController
 public class AccountBookController {
     private final AccountBookService accountBookService;
 
-    @GetMapping("/daily")
+    @GetMapping("/categories")
+    ResponseEntity<List<CategoryResponse>> getCategoryList(@UserPrincipal SimpleUserAuth simpleUserAuth) {
+        List<CategoryResponse> list = accountBookService.getCategoryList(simpleUserAuth);
+
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/entries/daily")
     ResponseEntity<List<DailyAccountEntryResponse>> getDailyAccountBookEntryList(
             @UserPrincipal SimpleUserAuth simpleUserAuth,
             @RequestParam LocalDateTime date

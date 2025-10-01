@@ -1,5 +1,6 @@
 package com.moira.conotebackend.domain.book.service;
 
+import com.moira.conotebackend.domain.book.dto.response.CategoryResponse;
 import com.moira.conotebackend.domain.book.dto.response.DailyAccountEntryResponse;
 import com.moira.conotebackend.domain.book.entity.AccountBookCategory;
 import com.moira.conotebackend.domain.book.mapper.AccountBookGroupMapper;
@@ -30,13 +31,23 @@ public class AccountBookService {
         }
     }
 
+    @Transactional(readOnly = false)
+    public List<CategoryResponse> getCategoryList(SimpleUserAuth simpleUserAuth) {
+        // 가입된 그룹의 ID 조회
+        String userId = simpleUserAuth.userId();
+        String groupId = accountBookGroupMapper.selectGroupId(userId);
+        
+        // 해당 그룹의 카테고리 목록 조회
+        return accountBookMapper.getCategoryList(groupId);
+    }
+
     @Transactional(readOnly = true)
     public List<DailyAccountEntryResponse> getDailyAccountBookEntryList(SimpleUserAuth simpleUserAuth, LocalDateTime date) {
         // 가입된 그룹의 ID 조회
         String userId = simpleUserAuth.userId();
         String groupId = accountBookGroupMapper.selectGroupId(userId);
 
-        //
+        // 일별 가계부 항목 조회
         return accountBookMapper.getDailyEntryList(groupId, date);
     }
 

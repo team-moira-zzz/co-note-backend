@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moira.conotebackend.domain.book.mapper.AccountBookMapper">
-
     <insert id="insertCategory" parameterType="com.moira.conotebackend.domain.book.entity.AccountBookCategory">
         INSERT INTO ACCOUNT_BOOK_CATEGORY (
                group_id
@@ -24,27 +23,60 @@
         ORDER BY id DESC
     </select>
 
+    <!-- 일별 가계부 항목 조회 -->
     <select id="getDailyEntryList" resultType="com.moira.conotebackend.domain.book.dto.response.DailyAccountEntryResponse">
         SELECT
-               A.id                           /* ID */
-             , A.type                         /* 구분 (지출,수입) */
-             , A.content                      /* 내용 */
-             , A.description                  /* 상세내용 */
-             , A.category_id AS categoryId    /* 카테고리 ID */
-             , CASE WHEN A.type = 'INCOME' THEN '수입' ELSE C.name END AS categoryName    /* 카테고리 이름 */
-             , A.price                        /* 금액 */
-             , A.user_id     AS userId        /* 작성자 ID */
-             , B.name        AS userName      /* 작성자 이름 */
-        FROM       ACCOUNT_BOOK_GROUP_ENTRY A
+               A.id
+             , A.type
+             , A.content
+             , A.description
+             , A.category_id AS categoryId
+             , CASE WHEN A.type = 'INCOME' THEN '수입' ELSE C.name END AS categoryName
+             , A.price
+             , A.user_id     AS userId
+             , B.nickname    AS userNickname
+        FROM       ACCOUNT_BOOK_ENTRY A
         /* INNER JOIN: USER 테이블 */
         INNER JOIN USER B
         ON         B.id = A.user_id
         /* LEFT JOIN: ACCOUNT_BOOK_CATEGORY 테이블 */
         LEFT JOIN ACCOUNT_BOOK_CATEGORY C
         ON         C.id = A.category_id
-        AND        C.group_id = #{group_id}
+        AND        C.group_id = #{groupId}
         /* 조건문 */
         WHERE A.group_id = #{groupId}
         AND   A.date = #{date}
+        /* 정렬 */
+        ORDER BY A.created_at DESC
     </select>
+
+    <!-- 가계부 항목 저장 -->
+    <insert id="insertEntry" parameterType="com.moira.conotebackend.domain.book.entity.AccountBookEntry">
+        INSERT INTO ACCOUNT_BOOK_ENTRY (
+               id
+             , user_id
+             , group_id
+             , category_id
+             , content
+             , description
+             , price
+             , date
+             , type
+             , method
+             , created_at
+        )
+        VALUES (
+               #{id}
+             , #{userId}
+             , #{groupId}
+             , #{categoryId}
+             , #{content}
+             , #{description}
+             , #{price}
+             , #{date}
+             , #{type}
+             , #{method}
+             , CURRENT_TIMESTAMP
+        )
+    </insert>
 </mapper>

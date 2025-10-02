@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class DailyAccountEntryResponse {
     // 가계부 항목 정보
-    private Long id;
+    private String id;
     private String type;
     private String content;
     private String description;
@@ -19,5 +19,5 @@ public class DailyAccountEntryResponse {
 
     // 유저 정보
     private String userId;
-    private String userName;
+    private String userNickname;
 }
